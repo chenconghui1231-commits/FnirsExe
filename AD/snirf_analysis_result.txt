@@ -1,0 +1,506 @@
+=== SNIRF文件结构分析 ===
+文件: E:\source\FnirsExe\AD\test.snirf
+分析时间: 18-Nov-2025 12:03:22
+文件大小: 7.26 MB
+
+=== 主要数据集 ===
+组: //nirs
+组: //nirs//nirs/aux1
+数据集: //nirs//nirs/aux1/dataTimeSeries (维度: 15618)
+数据集: //nirs//nirs/aux1/name (维度: 1)
+数据集: //nirs//nirs/aux1/time (维度: 15618)
+数据集: //nirs//nirs/aux1/timeOffset (维度: 1)
+组: //nirs//nirs/aux2
+数据集: //nirs//nirs/aux2/dataTimeSeries (维度: 15618)
+数据集: //nirs//nirs/aux2/name (维度: 1)
+数据集: //nirs//nirs/aux2/time (维度: 15618)
+数据集: //nirs//nirs/aux2/timeOffset (维度: 1)
+组: //nirs//nirs/aux3
+数据集: //nirs//nirs/aux3/dataTimeSeries (维度: 15618)
+数据集: //nirs//nirs/aux3/name (维度: 1)
+数据集: //nirs//nirs/aux3/time (维度: 15618)
+数据集: //nirs//nirs/aux3/timeOffset (维度: 1)
+组: //nirs//nirs/aux4
+数据集: //nirs//nirs/aux4/dataTimeSeries (维度: 15618)
+数据集: //nirs//nirs/aux4/name (维度: 1)
+数据集: //nirs//nirs/aux4/time (维度: 15618)
+数据集: //nirs//nirs/aux4/timeOffset (维度: 1)
+组: //nirs//nirs/data1
+组: //nirs//nirs/data1//nirs/data1/measurementList1
+数据集: //nirs//nirs/data1//nirs/data1/measurementList1/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList1/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList1/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList1/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList1/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList1/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList1/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList1/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList10
+数据集: //nirs//nirs/data1//nirs/data1/measurementList10/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList10/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList10/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList10/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList10/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList10/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList10/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList10/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList11
+数据集: //nirs//nirs/data1//nirs/data1/measurementList11/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList11/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList11/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList11/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList11/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList11/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList11/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList11/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList12
+数据集: //nirs//nirs/data1//nirs/data1/measurementList12/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList12/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList12/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList12/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList12/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList12/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList12/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList12/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList13
+数据集: //nirs//nirs/data1//nirs/data1/measurementList13/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList13/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList13/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList13/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList13/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList13/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList13/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList13/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList14
+数据集: //nirs//nirs/data1//nirs/data1/measurementList14/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList14/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList14/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList14/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList14/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList14/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList14/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList14/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList15
+数据集: //nirs//nirs/data1//nirs/data1/measurementList15/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList15/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList15/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList15/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList15/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList15/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList15/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList15/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList16
+数据集: //nirs//nirs/data1//nirs/data1/measurementList16/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList16/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList16/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList16/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList16/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList16/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList16/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList16/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList17
+数据集: //nirs//nirs/data1//nirs/data1/measurementList17/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList17/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList17/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList17/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList17/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList17/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList17/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList17/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList18
+数据集: //nirs//nirs/data1//nirs/data1/measurementList18/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList18/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList18/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList18/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList18/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList18/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList18/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList18/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList19
+数据集: //nirs//nirs/data1//nirs/data1/measurementList19/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList19/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList19/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList19/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList19/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList19/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList19/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList19/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList2
+数据集: //nirs//nirs/data1//nirs/data1/measurementList2/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList2/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList2/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList2/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList2/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList2/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList2/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList2/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList20
+数据集: //nirs//nirs/data1//nirs/data1/measurementList20/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList20/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList20/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList20/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList20/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList20/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList20/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList20/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList21
+数据集: //nirs//nirs/data1//nirs/data1/measurementList21/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList21/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList21/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList21/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList21/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList21/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList21/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList21/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList22
+数据集: //nirs//nirs/data1//nirs/data1/measurementList22/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList22/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList22/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList22/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList22/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList22/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList22/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList22/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList23
+数据集: //nirs//nirs/data1//nirs/data1/measurementList23/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList23/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList23/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList23/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList23/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList23/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList23/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList23/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList24
+数据集: //nirs//nirs/data1//nirs/data1/measurementList24/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList24/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList24/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList24/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList24/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList24/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList24/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList24/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList25
+数据集: //nirs//nirs/data1//nirs/data1/measurementList25/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList25/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList25/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList25/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList25/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList25/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList25/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList25/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList26
+数据集: //nirs//nirs/data1//nirs/data1/measurementList26/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList26/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList26/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList26/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList26/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList26/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList26/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList26/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList27
+数据集: //nirs//nirs/data1//nirs/data1/measurementList27/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList27/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList27/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList27/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList27/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList27/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList27/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList27/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList28
+数据集: //nirs//nirs/data1//nirs/data1/measurementList28/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList28/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList28/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList28/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList28/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList28/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList28/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList28/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList29
+数据集: //nirs//nirs/data1//nirs/data1/measurementList29/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList29/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList29/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList29/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList29/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList29/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList29/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList29/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList3
+数据集: //nirs//nirs/data1//nirs/data1/measurementList3/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList3/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList3/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList3/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList3/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList3/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList3/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList3/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList30
+数据集: //nirs//nirs/data1//nirs/data1/measurementList30/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList30/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList30/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList30/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList30/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList30/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList30/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList30/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList31
+数据集: //nirs//nirs/data1//nirs/data1/measurementList31/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList31/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList31/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList31/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList31/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList31/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList31/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList31/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList32
+数据集: //nirs//nirs/data1//nirs/data1/measurementList32/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList32/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList32/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList32/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList32/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList32/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList32/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList32/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList33
+数据集: //nirs//nirs/data1//nirs/data1/measurementList33/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList33/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList33/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList33/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList33/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList33/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList33/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList33/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList34
+数据集: //nirs//nirs/data1//nirs/data1/measurementList34/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList34/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList34/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList34/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList34/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList34/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList34/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList34/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList35
+数据集: //nirs//nirs/data1//nirs/data1/measurementList35/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList35/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList35/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList35/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList35/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList35/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList35/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList35/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList36
+数据集: //nirs//nirs/data1//nirs/data1/measurementList36/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList36/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList36/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList36/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList36/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList36/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList36/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList36/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList37
+数据集: //nirs//nirs/data1//nirs/data1/measurementList37/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList37/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList37/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList37/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList37/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList37/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList37/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList37/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList38
+数据集: //nirs//nirs/data1//nirs/data1/measurementList38/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList38/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList38/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList38/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList38/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList38/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList38/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList38/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList39
+数据集: //nirs//nirs/data1//nirs/data1/measurementList39/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList39/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList39/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList39/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList39/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList39/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList39/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList39/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList4
+数据集: //nirs//nirs/data1//nirs/data1/measurementList4/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList4/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList4/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList4/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList4/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList4/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList4/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList4/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList40
+数据集: //nirs//nirs/data1//nirs/data1/measurementList40/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList40/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList40/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList40/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList40/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList40/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList40/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList40/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList41
+数据集: //nirs//nirs/data1//nirs/data1/measurementList41/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList41/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList41/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList41/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList41/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList41/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList41/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList41/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList42
+数据集: //nirs//nirs/data1//nirs/data1/measurementList42/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList42/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList42/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList42/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList42/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList42/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList42/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList42/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList43
+数据集: //nirs//nirs/data1//nirs/data1/measurementList43/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList43/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList43/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList43/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList43/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList43/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList43/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList43/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList44
+数据集: //nirs//nirs/data1//nirs/data1/measurementList44/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList44/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList44/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList44/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList44/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList44/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList44/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList44/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList5
+数据集: //nirs//nirs/data1//nirs/data1/measurementList5/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList5/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList5/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList5/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList5/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList5/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList5/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList5/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList6
+数据集: //nirs//nirs/data1//nirs/data1/measurementList6/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList6/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList6/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList6/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList6/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList6/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList6/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList6/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList7
+数据集: //nirs//nirs/data1//nirs/data1/measurementList7/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList7/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList7/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList7/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList7/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList7/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList7/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList7/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList8
+数据集: //nirs//nirs/data1//nirs/data1/measurementList8/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList8/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList8/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList8/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList8/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList8/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList8/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList8/wavelengthIndex (维度: 1)
+组: //nirs//nirs/data1//nirs/data1/measurementList9
+数据集: //nirs//nirs/data1//nirs/data1/measurementList9/dataType (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList9/dataTypeIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList9/detectorGain (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList9/detectorIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList9/moduleIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList9/sourceIndex (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList9/sourcePower (维度: 1)
+数据集: //nirs//nirs/data1//nirs/data1/measurementList9/wavelengthIndex (维度: 1)
+数据集: //nirs//nirs/data1/dataTimeSeries (维度: [44 15618])
+数据集: //nirs//nirs/data1/time (维度: 15618)
+组: //nirs//nirs/metaDataTags
+数据集: //nirs//nirs/metaDataTags/FrequencyUnit (维度: 1)
+数据集: //nirs//nirs/metaDataTags/LengthUnit (维度: 1)
+数据集: //nirs//nirs/metaDataTags/MeasurementDate (维度: 1)
+数据集: //nirs//nirs/metaDataTags/MeasurementTime (维度: 1)
+数据集: //nirs//nirs/metaDataTags/SubjectID (维度: 1)
+数据集: //nirs//nirs/metaDataTags/TimeUnit (维度: 1)
+组: //nirs//nirs/probe
+数据集: //nirs//nirs/probe/correlationTimeDelayWidths (维度: 1)
+数据集: //nirs//nirs/probe/correlationTimeDelays (维度: 1)
+数据集: //nirs//nirs/probe/detectorLabels (维度: 8)
+数据集: //nirs//nirs/probe/detectorPos2D (维度: [2 8])
+数据集: //nirs//nirs/probe/frequencies (维度: 1)
+数据集: //nirs//nirs/probe/sourceLabels (维度: 10)
+数据集: //nirs//nirs/probe/sourcePos2D (维度: [2 10])
+数据集: //nirs//nirs/probe/timeDelayWidths (维度: 1)
+数据集: //nirs//nirs/probe/timeDelays (维度: 1)
+数据集: //nirs//nirs/probe/wavelengths (维度: 2)
+组: //nirs//nirs/stim1
+数据集: //nirs//nirs/stim1/data (维度: [3 30])
+数据集: //nirs//nirs/stim1/name (维度: 1)
+组: //nirs//nirs/stim2
+数据集: //nirs//nirs/stim2/data (维度: 3)
+数据集: //nirs//nirs/stim2/name (维度: 1)
+组: //nirs//nirs/stim3
+数据集: //nirs//nirs/stim3/data (维度: [3 31])
+数据集: //nirs//nirs/stim3/name (维度: 1)
+数据集: /formatVersion (维度: 1)
+
+=== 关键数据内容 ===
+波长: [756 852] nm
+数据时间序列: 44 时间点 × 15618 数据列
+
+=== 测量列表信息 ===
+测量列表 1: 源=1, 探测器=1, 波长索引=0
+测量列表 2: 源=3, 探测器=1, 波长索引=0
+测量列表 3: 源=2, 探测器=1, 波长索引=0
+测量列表 4: 源=1, 探测器=2, 波长索引=0
+测量列表 5: 源=3, 探测器=2, 波长索引=0
+测量列表 6: 源=4, 探测器=2, 波长索引=0
+测量列表 7: 源=4, 探测器=3, 波长索引=0
+测量列表 8: 源=5, 探测器=3, 波长索引=0
+测量列表 9: 源=3, 探测器=4, 波长索引=0
+测量列表 10: 源=4, 探测器=4, 波长索引=0
+测量列表 11: 源=5, 探测器=4, 波长索引=0
+测量列表 12: 源=8, 探测器=5, 波长索引=0
+测量列表 13: 源=6, 探测器=5, 波长索引=0
+测量列表 14: 源=7, 探测器=5, 波长索引=0
+测量列表 15: 源=9, 探测器=6, 波长索引=0
+测量列表 16: 源=8, 探测器=6, 波长索引=0
+测量列表 17: 源=6, 探测器=6, 波长索引=0
+测量列表 18: 源=10, 探测器=7, 波长索引=0
+测量列表 19: 源=9, 探测器=7, 波长索引=0
+测量列表 20: 源=8, 探测器=7, 波长索引=0
+测量列表 21: 源=10, 探测器=8, 波长索引=0
+测量列表 22: 源=9, 探测器=8, 波长索引=0
+测量列表 23: 源=1, 探测器=1, 波长索引=1
+测量列表 24: 源=3, 探测器=1, 波长索引=1
+测量列表 25: 源=2, 探测器=1, 波长索引=1
+测量列表 26: 源=1, 探测器=2, 波长索引=1
+测量列表 27: 源=3, 探测器=2, 波长索引=1
+测量列表 28: 源=4, 探测器=2, 波长索引=1
+测量列表 29: 源=4, 探测器=3, 波长索引=1
+测量列表 30: 源=5, 探测器=3, 波长索引=1
+测量列表 31: 源=3, 探测器=4, 波长索引=1
+测量列表 32: 源=4, 探测器=4, 波长索引=1
+测量列表 33: 源=5, 探测器=4, 波长索引=1
+测量列表 34: 源=8, 探测器=5, 波长索引=1
+测量列表 35: 源=6, 探测器=5, 波长索引=1
+测量列表 36: 源=7, 探测器=5, 波长索引=1
+测量列表 37: 源=9, 探测器=6, 波长索引=1
+测量列表 38: 源=8, 探测器=6, 波长索引=1
+测量列表 39: 源=6, 探测器=6, 波长索引=1
+测量列表 40: 源=10, 探测器=7, 波长索引=1
+测量列表 41: 源=9, 探测器=7, 波长索引=1
+测量列表 42: 源=8, 探测器=7, 波长索引=1
+测量列表 43: 源=10, 探测器=8, 波长索引=1
+测量列表 44: 源=9, 探测器=8, 波长索引=1
+
+总共找到 44 个测量列表条目

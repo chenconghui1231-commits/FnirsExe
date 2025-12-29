@@ -1,0 +1,8 @@
+﻿Patient Name:,张三
+Gender:,男
+Age:,25
+Recording Time:,2025-09-12 19:36:27
+
+Time(sec),Channel,HbO(μM),HbR(μM),HbT(μM)
+0.0,1,5.2195,-0.3348,4.8847
+0.0,3,-0.6330,0.0412,-0.5918
