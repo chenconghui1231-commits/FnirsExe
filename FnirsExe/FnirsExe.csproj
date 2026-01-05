@@ -301,6 +301,7 @@
     <Compile Include="Snirf\Models\SnirfModels.cs" />
     <Compile Include="Snirf\Processing\BandpassFilt.cs" />
     <Compile Include="Snirf\Processing\BlockAvg.cs" />
+    <Compile Include="Snirf\Processing\Homer3ProcessingPipeline.cs" />
     <Compile Include="Snirf\Processing\IntensityToOd.cs" />
     <Compile Include="Snirf\Processing\MotionArtifactByChannel.cs" />
     <Compile Include="Snirf\Processing\MotionCorrectCbsi.cs" />
