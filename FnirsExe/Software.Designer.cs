@@ -51,6 +51,8 @@
             this.cb3 = new System.Windows.Forms.CheckBox();
             this.cb1 = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnSaveRawData = new System.Windows.Forms.Button();
+            this.OpenBrainViewer = new System.Windows.Forms.Button();
             this.btnShowImage = new System.Windows.Forms.Button();
             this.btnSavedata = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -66,7 +68,6 @@
             this.tbUname = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbReceive = new System.Windows.Forms.TextBox();
-            this.OpenBrainViewer = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -87,7 +88,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(21, 86);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(339, 292);
+            this.panel1.Size = new System.Drawing.Size(440, 303);
             this.panel1.TabIndex = 0;
             // 
             // cbStop
@@ -236,7 +237,7 @@
             this.groupBox1.Font = new System.Drawing.Font("宋体", 12F);
             this.groupBox1.Location = new System.Drawing.Point(21, 408);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(339, 138);
+            this.groupBox1.Size = new System.Drawing.Size(440, 145);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "通道选择";
@@ -323,6 +324,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnSaveRawData);
             this.panel2.Controls.Add(this.OpenBrainViewer);
             this.panel2.Controls.Add(this.btnShowImage);
             this.panel2.Controls.Add(this.btnSavedata);
@@ -333,13 +335,34 @@
             this.panel2.Controls.Add(this.rbString);
             this.panel2.Location = new System.Drawing.Point(21, 577);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(351, 319);
+            this.panel2.Size = new System.Drawing.Size(440, 439);
             this.panel2.TabIndex = 3;
+            // 
+            // btnSaveRawData
+            // 
+            this.btnSaveRawData.Font = new System.Drawing.Font("宋体", 12F);
+            this.btnSaveRawData.Location = new System.Drawing.Point(23, 273);
+            this.btnSaveRawData.Name = "btnSaveRawData";
+            this.btnSaveRawData.Size = new System.Drawing.Size(188, 39);
+            this.btnSaveRawData.TabIndex = 7;
+            this.btnSaveRawData.Text = "保存原始数据";
+            this.btnSaveRawData.UseVisualStyleBackColor = true;
+            // 
+            // OpenBrainViewer
+            // 
+            this.OpenBrainViewer.Font = new System.Drawing.Font("宋体", 12F);
+            this.OpenBrainViewer.Location = new System.Drawing.Point(183, 132);
+            this.OpenBrainViewer.Name = "OpenBrainViewer";
+            this.OpenBrainViewer.Size = new System.Drawing.Size(131, 39);
+            this.OpenBrainViewer.TabIndex = 6;
+            this.OpenBrainViewer.Text = "脑部图像";
+            this.OpenBrainViewer.UseVisualStyleBackColor = true;
+            this.OpenBrainViewer.Click += new System.EventHandler(this.OpenBrainViewer_Click);
             // 
             // btnShowImage
             // 
             this.btnShowImage.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnShowImage.Location = new System.Drawing.Point(23, 131);
+            this.btnShowImage.Location = new System.Drawing.Point(23, 132);
             this.btnShowImage.Name = "btnShowImage";
             this.btnShowImage.Size = new System.Drawing.Size(126, 39);
             this.btnShowImage.TabIndex = 4;
@@ -350,7 +373,7 @@
             // btnSavedata
             // 
             this.btnSavedata.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnSavedata.Location = new System.Drawing.Point(183, 131);
+            this.btnSavedata.Location = new System.Drawing.Point(188, 203);
             this.btnSavedata.Name = "btnSavedata";
             this.btnSavedata.Size = new System.Drawing.Size(126, 39);
             this.btnSavedata.TabIndex = 5;
@@ -360,7 +383,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnClear.Location = new System.Drawing.Point(23, 197);
+            this.btnClear.Location = new System.Drawing.Point(23, 203);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(131, 39);
             this.btnClear.TabIndex = 3;
@@ -424,9 +447,9 @@
             this.gbReceive.Controls.Add(this.label6);
             this.gbReceive.Controls.Add(this.tbReceive);
             this.gbReceive.Font = new System.Drawing.Font("宋体", 12F);
-            this.gbReceive.Location = new System.Drawing.Point(382, 72);
+            this.gbReceive.Location = new System.Drawing.Point(506, 86);
             this.gbReceive.Name = "gbReceive";
-            this.gbReceive.Size = new System.Drawing.Size(640, 824);
+            this.gbReceive.Size = new System.Drawing.Size(975, 930);
             this.gbReceive.TabIndex = 4;
             this.gbReceive.TabStop = false;
             this.gbReceive.Text = "接收数据";
@@ -434,7 +457,7 @@
             // tbAge
             // 
             this.tbAge.Font = new System.Drawing.Font("宋体", 12F);
-            this.tbAge.Location = new System.Drawing.Point(199, 675);
+            this.tbAge.Location = new System.Drawing.Point(238, 834);
             this.tbAge.Name = "tbAge";
             this.tbAge.Size = new System.Drawing.Size(286, 35);
             this.tbAge.TabIndex = 15;
@@ -442,7 +465,7 @@
             // tbGender
             // 
             this.tbGender.Font = new System.Drawing.Font("宋体", 12F);
-            this.tbGender.Location = new System.Drawing.Point(199, 625);
+            this.tbGender.Location = new System.Drawing.Point(238, 784);
             this.tbGender.Name = "tbGender";
             this.tbGender.Size = new System.Drawing.Size(286, 35);
             this.tbGender.TabIndex = 14;
@@ -451,7 +474,7 @@
             // 
             this.lbAge.AutoSize = true;
             this.lbAge.Font = new System.Drawing.Font("宋体", 12F);
-            this.lbAge.Location = new System.Drawing.Point(39, 686);
+            this.lbAge.Location = new System.Drawing.Point(78, 845);
             this.lbAge.Name = "lbAge";
             this.lbAge.Size = new System.Drawing.Size(118, 24);
             this.lbAge.TabIndex = 13;
@@ -461,7 +484,7 @@
             // 
             this.lbGender.AutoSize = true;
             this.lbGender.Font = new System.Drawing.Font("宋体", 12F);
-            this.lbGender.Location = new System.Drawing.Point(39, 636);
+            this.lbGender.Location = new System.Drawing.Point(78, 795);
             this.lbGender.Name = "lbGender";
             this.lbGender.Size = new System.Drawing.Size(118, 24);
             this.lbGender.TabIndex = 12;
@@ -470,7 +493,7 @@
             // tbUname
             // 
             this.tbUname.Font = new System.Drawing.Font("宋体", 12F);
-            this.tbUname.Location = new System.Drawing.Point(199, 573);
+            this.tbUname.Location = new System.Drawing.Point(238, 732);
             this.tbUname.Name = "tbUname";
             this.tbUname.Size = new System.Drawing.Size(286, 35);
             this.tbUname.TabIndex = 11;
@@ -479,7 +502,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 12F);
-            this.label6.Location = new System.Drawing.Point(39, 578);
+            this.label6.Location = new System.Drawing.Point(78, 737);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(118, 24);
             this.label6.TabIndex = 2;
@@ -491,25 +514,14 @@
             this.tbReceive.Multiline = true;
             this.tbReceive.Name = "tbReceive";
             this.tbReceive.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbReceive.Size = new System.Drawing.Size(618, 520);
+            this.tbReceive.Size = new System.Drawing.Size(939, 647);
             this.tbReceive.TabIndex = 0;
-            // 
-            // OpenBrainViewer
-            // 
-            this.OpenBrainViewer.Font = new System.Drawing.Font("宋体", 12F);
-            this.OpenBrainViewer.Location = new System.Drawing.Point(178, 197);
-            this.OpenBrainViewer.Name = "OpenBrainViewer";
-            this.OpenBrainViewer.Size = new System.Drawing.Size(131, 39);
-            this.OpenBrainViewer.TabIndex = 6;
-            this.OpenBrainViewer.Text = "脑部图像";
-            this.OpenBrainViewer.UseVisualStyleBackColor = true;
-            this.OpenBrainViewer.Click += new System.EventHandler(this.OpenBrainViewer_Click);
             // 
             // Software
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1063, 938);
+            this.ClientSize = new System.Drawing.Size(1524, 1097);
             this.Controls.Add(this.gbReceive);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox1);
@@ -570,5 +582,6 @@
         private System.Windows.Forms.Label lbGender;
         private System.Windows.Forms.TextBox tbUname;
         private System.Windows.Forms.Button OpenBrainViewer;
+        private System.Windows.Forms.Button btnSaveRawData;
     }
 }

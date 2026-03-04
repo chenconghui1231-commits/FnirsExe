@@ -6,59 +6,46 @@ namespace FnirsExe.Snirf.Processing
     {
         public static void ApplyInPlace(Od2Conc.ConcResult conc)
         {
-            if (conc == null) throw new ArgumentNullException(nameof(conc));
-            if (conc.HbO == null || conc.HbR == null || conc.HbT == null) return;
-
+            if (conc?.HbO == null) return;
             int T = conc.HbO.GetLength(0);
-            int P = conc.HbO.GetLength(1);
+            int Ch = conc.HbO.GetLength(1);
 
-            for (int p = 0; p < P; p++)
+            for (int ch = 0; ch < Ch; ch++)
             {
-                double stdO = Std(conc.HbO, p);
-                double stdR = Std(conc.HbR, p);
-                if (stdO <= 1e-12 || stdR <= 1e-12) continue;
+                double stdO = Std(conc.HbO, ch);
+                double stdR = Std(conc.HbR, ch);
+                if (stdR <= 1e-12) continue;
 
-                double k = stdO / stdR;
-
+                double alpha = stdO / stdR;
                 for (int t = 0; t < T; t++)
                 {
-                    double o = conc.HbO[t, p];
-                    double r = conc.HbR[t, p];
-                    if (double.IsNaN(o) || double.IsNaN(r)) continue;
-
-                    double o2 = (o - k * r) * 0.5;
-                    double r2 = (-o / k + r) * 0.5;
-
-                    conc.HbO[t, p] = o2;
-                    conc.HbR[t, p] = r2;
-                    conc.HbT[t, p] = o2 + r2;
+                    double o = conc.HbO[t, ch];
+                    double r = conc.HbR[t, ch];
+                    double newO = 0.5 * (o - alpha * r);
+                    double newR = 0.5 * (r - (1.0 / alpha) * o);
+                    conc.HbO[t, ch] = newO;
+                    conc.HbR[t, ch] = newR;
+                    conc.HbT[t, ch] = newO + newR;
                 }
             }
         }
 
-        private static double Std(double[,] x, int col)
+        private static double Std(double[,] d, int c)
         {
-            int T = x.GetLength(0);
+            int T = d.GetLength(0);
             double mean = 0; int n = 0;
-            for (int t = 0; t < T; t++)
+            for (int i = 0; i < T; i++)
             {
-                double v = x[t, col];
-                if (double.IsNaN(v) || double.IsInfinity(v)) continue;
-                mean += v; n++;
+                if (!double.IsNaN(d[i, c])) { mean += d[i, c]; n++; }
             }
             if (n <= 1) return 0;
             mean /= n;
-
-            double var = 0;
-            for (int t = 0; t < T; t++)
+            double sumSq = 0;
+            for (int i = 0; i < T; i++)
             {
-                double v = x[t, col];
-                if (double.IsNaN(v) || double.IsInfinity(v)) continue;
-                double d = v - mean;
-                var += d * d;
+                if (!double.IsNaN(d[i, c])) sumSq += Math.Pow(d[i, c] - mean, 2);
             }
-            var /= (n - 1);
-            return Math.Sqrt(var);
+            return Math.Sqrt(sumSq / (n - 1));
         }
     }
 }

@@ -1,354 +1,272 @@
 ﻿using System;
-using System.Collections.Generic;
+using FnirsExe.Snirf.Models;
 
 namespace FnirsExe.Snirf.Processing
 {
-    /// <summary>
-    /// Homer3-style Wavelet Motion Correction (close 1:1 to hmrR_MotionCorrectWavelet idea):
-    /// - db2 wavelet
-    /// - shift-invariant style using MODWT (maximal overlap / undecimated)
-    /// - iqr * IQR outlier hard removal (set coeffs to 0)
-    /// - zero pad to 2^N, remove DC, noise normalization, reconstruct, unpad
-    ///
-    /// Notes:
-    /// - Homer3 uses internal Matlab functions (NormalizationNoise/WT_inv/WaveletAnalysis).
-    ///   This implementation matches the same processing steps and intent closely.
-    /// - Boundary handling here uses circular convolution (periodic extension), which is standard for MODWT.
-    /// </summary>
-    public static class MotionCorrectWaveletHomer3
+    public static class MotionCorrectWavelet
     {
-        /// <summary>
-        /// Apply wavelet motion correction in-place on dod [T x M].
-        /// mlActMan/mlActAuto: vectors length M, 1=active, 0=inactive. null/empty => treated as all active.
-        /// iqr: if <0 => skip (same as Homer3). Typical 1.5.
-        /// turnon: 0 => skip, 1 => enable.
-        /// </summary>
-        public static void ApplyInPlace(double[,] dod,
-                                        int[] mlActMan,
-                                        int[] mlActAuto,
-                                        double iqr = 1.5,
-                                        int turnon = 1)
+        public class Options
         {
-            if (dod == null) throw new ArgumentNullException(nameof(dod));
+            public double IQR { get; set; } = 1.5;
+            public bool TurnOn { get; set; } = true;
 
-            if (turnon == 0) return;
-            if (iqr < 0) return;
-            if (iqr == 0) return; // degenerate: remove everything beyond median; keep safe
+            // 只对 active 通道做 wavelet（更贴近 Homer3）
+            public bool[] ActiveMask { get; set; } = null;
 
-            int T = dod.GetLength(0);
-            int M = dod.GetLength(1);
+            // Homer3: L = 4
+            public int L { get; set; } = 4;
+        }
 
-            // Initialize active masks (Homer3: if empty, initialize; then combine)
-            bool[] actMan = BuildActiveMask(M, mlActMan);
-            bool[] actAuto = BuildActiveMask(M, mlActAuto);
-            bool[] act = new bool[M];
-            for (int ch = 0; ch < M; ch++)
-                act[ch] = actMan[ch] && actAuto[ch];
+        // db2 scaling filter h (Daubechies 2)
+        private static readonly double[] h = new double[]
+        {
+            0.4829629131445341,
+            0.8365163037378079,
+            0.2241438680420134,
+           -0.1294095225512603
+        };
 
-            int SignalLength = T;
-            int N = (int)Math.Ceiling(Math.Log(SignalLength, 2.0)); // #levels
-            int L = 4; // Homer3 fixed in code
-            if (N < 1) return;
+        // db2 wavelet filter g (QMF): g[k] = (-1)^k * h[L-1-k]
+        private static readonly double[] g = BuildQmfFromScaling(h);
 
-            // In Homer3: DataPadded = zeros(2^N,1)
-            int padLen = 1 << N;
+        public static void Apply(SnirfFile snirf, Options opt)
+        {
+            if (snirf?.Data == null) return;
+            if (opt == null || !opt.TurnOn) return;
+            if (opt.IQR < 0) return;
 
-            var x = new double[SignalLength];
-            var padded = new double[padLen];
+            int L = opt.L <= 0 ? 4 : opt.L;
 
-            for (int ch = 0; ch < M; ch++)
+            foreach (var block in snirf.Data)
             {
-                if (!act[ch])
-                    continue; // inactive channels remain unchanged (Homer3 behavior)
+                double[,] dod = block.DataTimeSeries;
+                if (dod == null) continue;
 
-                // copy channel
-                for (int t = 0; t < SignalLength; t++) x[t] = dod[t, ch];
+                int signalLen = dod.GetLength(0);
+                int chCount = dod.GetLength(1);
+                if (signalLen < 2) continue;
 
-                // pad with zeros to 2^N
-                Array.Clear(padded, 0, padLen);
-                Array.Copy(x, 0, padded, 0, SignalLength);
+                int N = (int)Math.Ceiling(Math.Log(signalLen, 2.0));
+                if (N < 1) N = 1;
+                int nPow2 = 1 << N;
 
-                // remove DC
-                double dc = Mean(padded);
-                for (int i = 0; i < padLen; i++) padded[i] -= dc;
+                // zero pad to 2^N like Homer3
+                double[] padded = new double[nPow2];
 
-                // NormalizationNoise (Homer3): estimate noise scale and normalize
-                // Here: estimate from level-1 detail (highest frequency) via MODWT db2; sigma via MAD; NormCoef = sigma (guarded)
-                double normCoef = EstimateNoiseScaleMad_Db2_ModwtLevel1(padded);
-                if (normCoef <= 0) normCoef = 1e-12;
-                for (int i = 0; i < padLen; i++) padded[i] /= normCoef;
-
-                // MODWT decomposition up to N levels
-                // W[j] = detail at level j (1-based), V = scaling (approx)
-                var W = new double[N][];
-                double[] V = (double[])padded.Clone();
-
-                for (int j = 1; j <= N; j++)
+                for (int ch = 0; ch < chCount; ch++)
                 {
-                    (double[] Wj, double[] Vj) = Modwt_Db2_OneLevel(V, j);
-                    W[j - 1] = Wj;
-                    V = Vj;
-                }
+                    if (opt.ActiveMask != null && ch < opt.ActiveMask.Length && !opt.ActiveMask[ch])
+                        continue;
 
-                // WaveletAnalysis(StatWT,L,'db2',iqr,SignalLength):
-                // hard-remove coeffs outside median ± iqr*IQR using coefficients distribution
-                // Apply from L..N (if L > N, nothing happens)
-                if (L <= N)
-                {
-                    var pool = new List<double>(padLen * (N - L + 1));
-                    for (int j = L; j <= N; j++)
-                        pool.AddRange(W[j - 1]);
+                    Array.Clear(padded, 0, padded.Length);
+                    for (int t = 0; t < signalLen; t++)
+                        padded[t] = dod[t, ch];
 
-                    // distribution stats
-                    double q1 = Quantile(pool, 0.25);
-                    double q3 = Quantile(pool, 0.75);
-                    double iqrVal = q3 - q1;
-                    if (iqrVal < 1e-18) iqrVal = 1e-18;
+                    // DC remove
+                    double dc = MeanFinite(padded, signalLen); // ✅只用有效段算均值更贴近 Homer3
+                    if (double.IsNaN(dc) || double.IsInfinity(dc)) dc = 0.0;
 
-                    // center around median (robust)
-                    double med = Quantile(pool, 0.50);
-                    double low = med - iqr * iqrVal;
-                    double high = med + iqr * iqrVal;
-
-                    for (int j = L; j <= N; j++)
+                    for (int i = 0; i < nPow2; i++)
                     {
-                        var wj = W[j - 1];
-                        for (int i = 0; i < wj.Length; i++)
-                        {
-                            double v = wj[i];
-                            if (v < low || v > high)
-                                wj[i] = 0.0; // Homer3 description: set to zero
-                        }
+                        double v = padded[i];
+                        if (double.IsNaN(v) || double.IsInfinity(v)) v = 0.0;
+                        padded[i] = v - dc;
                     }
+
+                    // NormalizationNoise (近似实现)：用 level-1 detail 的 MAD 估计 sigma
+                    double normCoef;
+                    double[] yn = NormalizeNoise(padded, signalLen, out normCoef); // ✅统计也只用有效段
+
+                    // SWT + per-level IQR threshold + inverse SWT
+                    // ✅关键：IQR 统计/阈值只基于 signalLen，不把 padding 的 0 算进去
+                    double[] ar = WaveletIqrDenoise_Swt_Strided(yn, N, L, opt.IQR, signalLen);
+
+                    // undo normalization + add DC
+                    double invNorm = (normCoef == 0.0 || double.IsNaN(normCoef) || double.IsInfinity(normCoef)) ? 1.0 : (1.0 / normCoef);
+                    for (int i = 0; i < ar.Length; i++)
+                        ar[i] = ar[i] * invNorm + dc;
+
+                    // write back (original length)
+                    for (int t = 0; t < signalLen; t++)
+                        dod[t, ch] = ar[t];
                 }
-
-                // inverse MODWT reconstruction
-                double[] recon = (double[])V.Clone(); // start from coarsest scaling
-                for (int j = N; j >= 1; j--)
-                    recon = Imodwt_Db2_OneLevel(recon, W[j - 1], j);
-
-                // de-normalize and add DC back
-                for (int i = 0; i < padLen; i++) recon[i] = recon[i] * normCoef + dc;
-
-                // unpad back to original length and write back
-                for (int t = 0; t < SignalLength; t++)
-                    dod[t, ch] = recon[t];
             }
         }
 
-        // ------------------------- Active masks -------------------------
-
-        private static bool[] BuildActiveMask(int M, int[] ml)
+        // ---------------------------
+        // SWT decomposition/reconstruction using strided periodic convolution
+        // ---------------------------
+        private static double[] WaveletIqrDenoise_Swt_Strided(double[] x, int N, int L, double iqrMul, int signalLen)
         {
-            var act = new bool[M];
-            if (ml == null || ml.Length == 0)
+            int n = x.Length;
+
+            double[][] details = new double[N + 1][];
+            for (int j = 1; j <= N; j++) details[j] = new double[n];
+
+            double[] approx = (double[])x.Clone();
+
+            // Decompose
+            for (int j = 1; j <= N; j++)
             {
-                for (int i = 0; i < M; i++) act[i] = true;
-                return act;
+                int step = 1 << (j - 1);
+                double[] aNew = ConvolvePeriodicStrided(approx, h, step);
+                double[] dNew = ConvolvePeriodicStrided(approx, g, step);
+                approx = aNew;
+                details[j] = dNew;
             }
 
-            int len = Math.Min(M, ml.Length);
-            for (int i = 0; i < len; i++) act[i] = (ml[i] != 0);
-            for (int i = len; i < M; i++) act[i] = true; // if shorter, treat remaining as active
-            return act;
+            // Threshold details by IQR from level L..N (Homer3: L=4)
+            int startLevel = Math.Max(1, L);
+            int validLen = Math.Min(signalLen, n); // ✅只在有效段做阈值
+            for (int j = startLevel; j <= N; j++)
+                ApplyIqrThresholdInPlace(details[j], iqrMul, validLen);
+
+            // Reconstruct (inverse SWT)
+            for (int j = N; j >= 1; j--)
+            {
+                int step = 1 << (j - 1);
+
+                double[] aPart = ConvolvePeriodicStrided(approx, Reverse(h), step);
+                double[] dPart = ConvolvePeriodicStrided(details[j], Reverse(g), step);
+
+                for (int i = 0; i < n; i++)
+                    approx[i] = 0.5 * (aPart[i] + dPart[i]);
+            }
+
+            return approx;
         }
 
-        // ------------------------- Homer3-like noise normalization -------------------------
-
-        /// <summary>
-        /// Estimate noise scale using MAD of MODWT level-1 detail coefficients with db2.
-        /// This approximates Homer3's NormalizationNoise behavior (robust noise scaling).
-        /// </summary>
-        private static double EstimateNoiseScaleMad_Db2_ModwtLevel1(double[] x)
-        {
-            // Level 1 detail
-            var (W1, _) = Modwt_Db2_OneLevel(x, 1);
-
-            // sigma ≈ MAD / 0.6745
-            return MadSigma(W1);
-        }
-
-        // ------------------------- MODWT db2 (analysis & synthesis) -------------------------
-
-        // db2 scaling filter (orthonormal) length 4
-        // h = [ (1+sqrt3)/(4*sqrt2), (3+sqrt3)/(4*sqrt2), (3-sqrt3)/(4*sqrt2), (1-sqrt3)/(4*sqrt2) ]
-        // wavelet filter g[k] = (-1)^k * h[L-1-k]
-        private static readonly double[] H_db2 = BuildDb2Scaling();
-        private static readonly double[] G_db2 = BuildDb2WaveletFromScaling(H_db2);
-
-        // MODWT uses rescaled filters: h_tilde = h / sqrt(2), g_tilde = g / sqrt(2)
-        private static (double[] Wj, double[] Vj) Modwt_Db2_OneLevel(double[] Vprev, int level)
-        {
-            int n = Vprev.Length;
-            var W = new double[n];
-            var V = new double[n];
-
-            double[] ht = GetUpsampledFilter(H_db2, level, scaleBySqrt2: true);
-            double[] gt = GetUpsampledFilter(G_db2, level, scaleBySqrt2: true);
-
-            CircularConvolve(Vprev, gt, W);
-            CircularConvolve(Vprev, ht, V);
-
-            return (W, V);
-        }
-
-        private static double[] Imodwt_Db2_OneLevel(double[] Vj, double[] Wj, int level)
-        {
-            int n = Vj.Length;
-            var Vprev = new double[n];
-
-            // synthesis filters for orthonormal wavelets:
-            // time-reversed analysis filters (MODWT-scaled)
-            double[] ht = GetUpsampledFilter(H_db2, level, scaleBySqrt2: true);
-            double[] gt = GetUpsampledFilter(G_db2, level, scaleBySqrt2: true);
-
-            double[] hrev = Reverse(ht);
-            double[] grev = Reverse(gt);
-
-            var partA = new double[n];
-            var partD = new double[n];
-            CircularConvolve(Vj, hrev, partA);
-            CircularConvolve(Wj, grev, partD);
-
-            for (int i = 0; i < n; i++)
-                Vprev[i] = partA[i] + partD[i];
-
-            return Vprev;
-        }
-
-        private static void CircularConvolve(double[] x, double[] f, double[] y)
+        // y[i] = sum_{k} x[(i - k*step) mod n] * f[k]
+        private static double[] ConvolvePeriodicStrided(double[] x, double[] f, int step)
         {
             int n = x.Length;
             int m = f.Length;
-            Array.Clear(y, 0, y.Length);
+            double[] y = new double[n];
 
-            // y[t] = sum_k f[k] * x[(t - k) mod n]
-            for (int t = 0; t < n; t++)
+            for (int i = 0; i < n; i++)
             {
-                double s = 0.0;
+                double sum = 0.0;
                 for (int k = 0; k < m; k++)
                 {
-                    int idx = t - k;
+                    int idx = i - k * step;
                     idx %= n;
                     if (idx < 0) idx += n;
-                    s += f[k] * x[idx];
+                    sum += x[idx] * f[k];
                 }
-                y[t] = s;
+                y[i] = sum;
             }
+
+            return y;
         }
 
-        private static double[] GetUpsampledFilter(double[] baseFilter, int level, bool scaleBySqrt2)
+        // ---------------------------
+        // NormalizationNoise (近似)：MAD(detail1)/0.6745
+        // ✅统计只基于有效段，避免 padding 0 影响 sigma
+        // ---------------------------
+        private static double[] NormalizeNoise(double[] x, int signalLen, out double normCoef)
         {
-            // level j => insert (2^(j-1)-1) zeros between taps
-            int step = 1 << (level - 1);
-            int L = baseFilter.Length;
-            int outLen = (L - 1) * step + 1;
-            var up = new double[outLen];
+            double[] d1 = ConvolvePeriodicStrided(x, g, 1);
+            double sigma = MadSigma(d1, signalLen);
 
-            double scale = scaleBySqrt2 ? (1.0 / Math.Sqrt(2.0)) : 1.0;
-            for (int k = 0; k < L; k++)
-                up[k * step] = baseFilter[k] * scale;
+            if (sigma <= 0 || double.IsNaN(sigma) || double.IsInfinity(sigma))
+                sigma = 1.0;
 
-            return up;
+            normCoef = sigma;
+
+            double inv = 1.0 / sigma;
+            double[] y = new double[x.Length];
+            for (int i = 0; i < x.Length; i++)
+                y[i] = x[i] * inv;
+
+            return y;
+        }
+
+        private static double MadSigma(double[] v, int validLen)
+        {
+            validLen = Math.Min(validLen, v.Length);
+            if (validLen <= 0) return 1.0;
+
+            double[] abs = new double[validLen];
+            for (int i = 0; i < validLen; i++) abs[i] = Math.Abs(v[i]);
+
+            Array.Sort(abs);
+            double med = QuantileSorted(abs, 0.5);
+            return med / 0.6745;
+        }
+
+        // ✅IQR outlier -> 0（只用有效段 validLen 计算分位数&阈值，并且只阈值有效段）
+        private static void ApplyIqrThresholdInPlace(double[] coeff, double mul, int validLen)
+        {
+            validLen = Math.Min(validLen, coeff.Length);
+            if (validLen <= 4) return;
+
+            double[] tmp = new double[validLen];
+            Array.Copy(coeff, 0, tmp, 0, validLen);
+            Array.Sort(tmp);
+
+            double q1 = QuantileSorted(tmp, 0.25);
+            double q3 = QuantileSorted(tmp, 0.75);
+            double iqr = q3 - q1;
+
+            if (iqr <= 0 || double.IsNaN(iqr) || double.IsInfinity(iqr))
+                return;
+
+            double lower = q1 - mul * iqr;
+            double upper = q3 + mul * iqr;
+
+            for (int i = 0; i < validLen; i++)
+            {
+                double v = coeff[i];
+                if (v < lower || v > upper)
+                    coeff[i] = 0.0;
+            }
+            // padding 段不动（一般本来就接近0）
+        }
+
+        private static double QuantileSorted(double[] sorted, double q)
+        {
+            if (sorted.Length == 0) return 0.0;
+            double pos = (sorted.Length - 1) * q;
+            int i = (int)pos;
+            double f = pos - i;
+            if (i >= sorted.Length - 1) return sorted[sorted.Length - 1];
+            return sorted[i] * (1.0 - f) + sorted[i + 1] * f;
+        }
+
+        // ✅均值也只算有效段（SignalLength）
+        private static double MeanFinite(double[] v, int validLen)
+        {
+            validLen = Math.Min(validLen, v.Length);
+            double sum = 0.0;
+            int n = 0;
+            for (int i = 0; i < validLen; i++)
+            {
+                double x = v[i];
+                if (double.IsNaN(x) || double.IsInfinity(x)) continue;
+                sum += x;
+                n++;
+            }
+            return n > 0 ? sum / n : double.NaN;
         }
 
         private static double[] Reverse(double[] a)
         {
-            var r = new double[a.Length];
+            double[] r = new double[a.Length];
             for (int i = 0; i < a.Length; i++)
                 r[i] = a[a.Length - 1 - i];
             return r;
         }
 
-        private static double[] BuildDb2Scaling()
+        private static double[] BuildQmfFromScaling(double[] scaling)
         {
-            double s3 = Math.Sqrt(3.0);
-            double s2 = Math.Sqrt(2.0);
-            return new[]
-            {
-                (1 + s3) / (4 * s2),
-                (3 + s3) / (4 * s2),
-                (3 - s3) / (4 * s2),
-                (1 - s3) / (4 * s2)
-            };
-        }
-
-        private static double[] BuildDb2WaveletFromScaling(double[] h)
-        {
-            int L = h.Length;
-            var g = new double[L];
+            int L = scaling.Length;
+            double[] qmf = new double[L];
             for (int k = 0; k < L; k++)
             {
                 double sign = (k % 2 == 0) ? 1.0 : -1.0;
-                g[k] = sign * h[L - 1 - k];
+                qmf[k] = sign * scaling[L - 1 - k];
             }
-            return g;
-        }
-
-        // ------------------------- Stats helpers -------------------------
-
-        private static double Mean(double[] x)
-        {
-            double s = 0;
-            for (int i = 0; i < x.Length; i++) s += x[i];
-            return s / x.Length;
-        }
-
-        private static double MadSigma(double[] data)
-        {
-            if (data == null || data.Length == 0) return 0;
-
-            var arr = (double[])data.Clone();
-            Array.Sort(arr);
-            double med = MedianSorted(arr);
-
-            for (int i = 0; i < arr.Length; i++)
-                arr[i] = Math.Abs(arr[i] - med);
-
-            Array.Sort(arr);
-            double mad = MedianSorted(arr);
-            return mad / 0.6745;
-        }
-
-        private static double MedianSorted(double[] sorted)
-        {
-            int n = sorted.Length;
-            if (n == 0) return 0;
-            if ((n & 1) == 1) return sorted[n / 2];
-            return 0.5 * (sorted[n / 2 - 1] + sorted[n / 2]);
-        }
-
-        private static double Quantile(List<double> data, double p)
-        {
-            if (data == null || data.Count == 0) return 0;
-            if (p <= 0) return Min(data);
-            if (p >= 1) return Max(data);
-
-            var arr = data.ToArray();
-            Array.Sort(arr);
-
-            // linear interpolation between closest ranks
-            double pos = (arr.Length - 1) * p;
-            int i = (int)Math.Floor(pos);
-            int j = (int)Math.Ceiling(pos);
-            if (i == j) return arr[i];
-
-            double w = pos - i;
-            return arr[i] * (1.0 - w) + arr[j] * w;
-        }
-
-        private static double Min(List<double> a)
-        {
-            double m = double.PositiveInfinity;
-            for (int i = 0; i < a.Count; i++) if (a[i] < m) m = a[i];
-            return m;
-        }
-
-        private static double Max(List<double> a)
-        {
-            double m = double.NegativeInfinity;
-            for (int i = 0; i < a.Count; i++) if (a[i] > m) m = a[i];
-            return m;
+            return qmf;
         }
     }
 }

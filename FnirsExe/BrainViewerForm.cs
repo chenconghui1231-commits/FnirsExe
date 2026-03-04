@@ -441,6 +441,16 @@ namespace FnirsExe
                     }
                 }
 
+                // 根据当前数据动态调整颜色范围：如果Hb变化幅度很小，固定[-2.5,2.5]会导致一直接近0颜色不明显。
+                // 这里用“当前8通道最大绝对值”作为动态范围（并给一点余量），让颜色随实时数据变化更敏感。
+                float scaleHbO = ComputeAutoScale(valuesHbO);
+                float scaleHbR = ComputeAutoScale(valuesHbR);
+                float scaleHbT = ComputeAutoScale(valuesHbT);
+
+                if (_brainRendererHbO != null) _brainRendererHbO.ColorScale = scaleHbO;
+                if (_brainRendererHbR != null) _brainRendererHbR.ColorScale = scaleHbR;
+                if (_brainRendererHbT != null) _brainRendererHbT.ColorScale = scaleHbT;
+
                 // 更新三个脑图像
                 _brainRendererHbO?.SetChannelData(positions, valuesHbO);
                 _brainRendererHbR?.SetChannelData(positions, valuesHbR);
@@ -460,6 +470,32 @@ namespace FnirsExe
             }
         }
 
+        /// <summary>
+        /// 根据当前通道值自动计算颜色映射范围。
+        /// 返回值用于 BrainInterpolationRenderer.ColorScale（[-scale, +scale]）。
+        /// </summary>
+        private float ComputeAutoScale(List<float> values)
+        {
+            float maxAbs = 0f;
+            for (int i = 0; i < values.Count; i++)
+            {
+                float v = values[i];
+                if (float.IsNaN(v) || float.IsInfinity(v))
+                    continue;
+                maxAbs = Math.Max(maxAbs, Math.Abs(v));
+            }
+
+            // 没数据时保持默认 2.5（和原逻辑一致）
+            if (maxAbs < 1e-6f)
+                return 2.5f;
+
+            // 给 20% 余量，避免总是顶到边界变“纯红/纯蓝”
+            float scale = maxAbs * 1.2f;
+
+            // 给一个下限，避免抖动时scale太小导致颜色噪声满屏
+            return Math.Max(scale, 0.05f);
+        }
+
         // 清理资源
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -473,6 +509,11 @@ namespace FnirsExe
             hbtValuesByChannel.Clear();
 
             base.OnFormClosed(e);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

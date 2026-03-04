@@ -21,9 +21,18 @@ namespace FnirsExe
         private List<float> _channelValues = new List<float>();//存储每个通道对应的测量值
 
         private int _vao, _vbo, _ebo, _colorVbo;// _vao：顶点数组对象，管理所有顶点属性
-                                                // _vbo：顶点缓冲区对象，存储顶点坐标
-                                                // _ebo：元素缓冲区对象，存储三角形索引
-                                                // _colorVbo：颜色缓冲区对象，存储顶点颜色
+
+        // ====== Realtime color mapping controls ======
+        // 颜色映射动态范围（[-ColorScale, ColorScale]）。
+        // BrainViewerForm 会在每次更新数据时根据当前通道值的幅度自动设置该值。
+        // 设为较小值可让小幅度 Hb 变化更“显色”。
+        public float ColorScale { get; set; } = 2.5f;
+
+        // 值接近 0 时保持灰色的阈值（避免噪声把整脑染色）。
+        public float ZeroEpsilon { get; set; } = 1e-6f;
+        // _vbo：顶点缓冲区对象，存储顶点坐标
+        // _ebo：元素缓冲区对象，存储三角形索引
+        // _colorVbo：颜色缓冲区对象，存储顶点颜色
 
         public bool Initialize()
         {
@@ -147,11 +156,11 @@ namespace FnirsExe
 
             Console.WriteLine($"开始插值: {_channelPositions.Count}个通道位置, {_channelValues.Count}个值");
 
-            // 检查是否有非零的有效数据
+            // 检查是否有有效数据（避免用一个过大的阈值导致小幅度Hb变化始终显示灰色）
             bool hasValidData = false;
             for (int i = 0; i < _channelValues.Count; i++)
             {
-                if (Math.Abs(_channelValues[i]) > 0.001f)
+                if (!float.IsNaN(_channelValues[i]) && !float.IsInfinity(_channelValues[i]) && Math.Abs(_channelValues[i]) > ZeroEpsilon)
                 {
                     hasValidData = true;
                     break;
@@ -176,8 +185,8 @@ namespace FnirsExe
                 {
                     float interpolatedValue = IDWInterpolation(vertex);
 
-                    // 只有当插值结果不为0时才显示颜色，否则保持灰色
-                    if (Math.Abs(interpolatedValue) > 0.001f)
+                    // 只有当插值结果足够大时才显示颜色，否则保持灰色
+                    if (!float.IsNaN(interpolatedValue) && !float.IsInfinity(interpolatedValue) && Math.Abs(interpolatedValue) > ZeroEpsilon)
                     {
                         var color = ValueToColor(interpolatedValue);
                         _vertexColors[i * 3] = color.X;
@@ -208,18 +217,18 @@ namespace FnirsExe
         {
             float numerator = 0f;
             float denominator = 0f;
-            const float epsilon = 0.001f;
+            const float distanceEps = 0.001f;
             bool hasNonZeroData = false;
 
             for (int i = 0; i < _channelPositions.Count; i++)
             {
-                // 如果通道值为0，跳过该通道的插值计算
-                if (Math.Abs(_channelValues[i]) < 0.001f)
+                // 如果通道值接近0（或为无效值），跳过该通道的插值计算
+                if (float.IsNaN(_channelValues[i]) || float.IsInfinity(_channelValues[i]) || Math.Abs(_channelValues[i]) < ZeroEpsilon)
                     continue;
 
                 hasNonZeroData = true;
                 float distance = Vector3.Distance(targetPoint, _channelPositions[i]);
-                if (distance < epsilon)
+                if (distance < distanceEps)
                     return _channelValues[i];
 
                 float weight = 1.0f / (float)Math.Pow(distance, power);
@@ -234,16 +243,17 @@ namespace FnirsExe
         private Vector3 ValueToColor(float value)
         {
             // 如果值为0（或接近0），返回灰色
-            if (Math.Abs(value) < 0.001f)
+            if (float.IsNaN(value) || float.IsInfinity(value) || Math.Abs(value) < ZeroEpsilon)
             {
                 return new Vector3(0.6f, 0.6f, 0.6f); // 灰色
             }
 
             // 将值归一化到 [0,1] 范围用于颜色映射
-            value = Math.Max(-2.5f, Math.Min(2.5f, value)); // 使用实际的数据范围
+            float scale = Math.Max(ZeroEpsilon, ColorScale);
+            value = Math.Max(-scale, Math.Min(scale, value)); // 动态范围
 
-            // 将值从 [-2.5, 2.5] 映射到 [0, 1]
-            float normalizedValue = (value + 2.5f) / 5.0f;
+            // 将值从 [-scale, scale] 映射到 [0, 1]
+            float normalizedValue = (value + scale) / (2.0f * scale);
 
             // 使用热力图颜色映射：蓝色（低值）到红色（高值）
             if (normalizedValue < 0.25f)

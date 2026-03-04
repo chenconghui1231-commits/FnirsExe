@@ -47,10 +47,10 @@
             // 
             this.glControlHbO.BackColor = System.Drawing.SystemColors.ControlLight;
             this.glControlHbO.ForeColor = System.Drawing.SystemColors.Control;
-            this.glControlHbO.Location = new System.Drawing.Point(70, 131);
+            this.glControlHbO.Location = new System.Drawing.Point(111, 119);
             this.glControlHbO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.glControlHbO.Name = "glControlHbO";
-            this.glControlHbO.Size = new System.Drawing.Size(430, 522);
+            this.glControlHbO.Size = new System.Drawing.Size(313, 411);
             this.glControlHbO.TabIndex = 27;
             this.glControlHbO.VSync = false;
             // 
@@ -58,10 +58,10 @@
             // 
             this.glControlHbR.BackColor = System.Drawing.SystemColors.ControlLight;
             this.glControlHbR.ForeColor = System.Drawing.SystemColors.Control;
-            this.glControlHbR.Location = new System.Drawing.Point(562, 131);
+            this.glControlHbR.Location = new System.Drawing.Point(562, 119);
             this.glControlHbR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.glControlHbR.Name = "glControlHbR";
-            this.glControlHbR.Size = new System.Drawing.Size(430, 522);
+            this.glControlHbR.Size = new System.Drawing.Size(329, 420);
             this.glControlHbR.TabIndex = 28;
             this.glControlHbR.VSync = false;
             // 
@@ -69,10 +69,10 @@
             // 
             this.glControlHbT.BackColor = System.Drawing.SystemColors.ControlLight;
             this.glControlHbT.ForeColor = System.Drawing.SystemColors.Control;
-            this.glControlHbT.Location = new System.Drawing.Point(1044, 131);
+            this.glControlHbT.Location = new System.Drawing.Point(1093, 134);
             this.glControlHbT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.glControlHbT.Name = "glControlHbT";
-            this.glControlHbT.Size = new System.Drawing.Size(430, 522);
+            this.glControlHbT.Size = new System.Drawing.Size(313, 408);
             this.glControlHbT.TabIndex = 29;
             this.glControlHbT.VSync = false;
             // 
@@ -97,6 +97,7 @@
             this.label1.Size = new System.Drawing.Size(46, 24);
             this.label1.TabIndex = 31;
             this.label1.Text = "HbR";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -115,7 +116,7 @@
             this.colorBarPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.colorBarPanel.Location = new System.Drawing.Point(1556, 131);
             this.colorBarPanel.Name = "colorBarPanel";
-            this.colorBarPanel.Size = new System.Drawing.Size(44, 522);
+            this.colorBarPanel.Size = new System.Drawing.Size(44, 411);
             this.colorBarPanel.TabIndex = 33;
             this.colorBarPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.colorBarPanel_Paint);
             // 
@@ -135,7 +136,7 @@
             this.colorBarLabelMidHigh.AutoSize = true;
             this.colorBarLabelMidHigh.BackColor = System.Drawing.Color.Transparent;
             this.colorBarLabelMidHigh.Font = new System.Drawing.Font("宋体", 8F);
-            this.colorBarLabelMidHigh.Location = new System.Drawing.Point(1620, 266);
+            this.colorBarLabelMidHigh.Location = new System.Drawing.Point(1620, 219);
             this.colorBarLabelMidHigh.Name = "colorBarLabelMidHigh";
             this.colorBarLabelMidHigh.Size = new System.Drawing.Size(31, 16);
             this.colorBarLabelMidHigh.TabIndex = 4;
@@ -146,7 +147,7 @@
             this.colorBarLabelMid.AutoSize = true;
             this.colorBarLabelMid.BackColor = System.Drawing.Color.Transparent;
             this.colorBarLabelMid.Font = new System.Drawing.Font("宋体", 8F);
-            this.colorBarLabelMid.Location = new System.Drawing.Point(1620, 391);
+            this.colorBarLabelMid.Location = new System.Drawing.Point(1620, 320);
             this.colorBarLabelMid.Name = "colorBarLabelMid";
             this.colorBarLabelMid.Size = new System.Drawing.Size(31, 16);
             this.colorBarLabelMid.TabIndex = 3;
@@ -157,7 +158,7 @@
             this.colorBarLabelMidLow.AutoSize = true;
             this.colorBarLabelMidLow.BackColor = System.Drawing.Color.Transparent;
             this.colorBarLabelMidLow.Font = new System.Drawing.Font("宋体", 8F);
-            this.colorBarLabelMidLow.Location = new System.Drawing.Point(1620, 523);
+            this.colorBarLabelMidLow.Location = new System.Drawing.Point(1620, 424);
             this.colorBarLabelMidLow.Name = "colorBarLabelMidLow";
             this.colorBarLabelMidLow.Size = new System.Drawing.Size(39, 16);
             this.colorBarLabelMidLow.TabIndex = 2;
@@ -168,7 +169,7 @@
             this.colorBarLabelMin.AutoSize = true;
             this.colorBarLabelMin.BackColor = System.Drawing.Color.Transparent;
             this.colorBarLabelMin.Font = new System.Drawing.Font("宋体", 8F);
-            this.colorBarLabelMin.Location = new System.Drawing.Point(1620, 637);
+            this.colorBarLabelMin.Location = new System.Drawing.Point(1620, 526);
             this.colorBarLabelMin.Name = "colorBarLabelMin";
             this.colorBarLabelMin.Size = new System.Drawing.Size(39, 16);
             this.colorBarLabelMin.TabIndex = 1;
